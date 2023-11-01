@@ -1,15 +1,18 @@
 {
-  "name": "@lerna-v2/date-logic",
+  "name": "@zidabah/date-logic",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "https://github.com/zidabah/lerna-v2",
-  "publishConfig": {
-    "@zidabah:registry": "https://npm.pkg.github.com/zidabah"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zidabah/lerna-v2"
   },
-  "author": "",
-  "license": "ISC"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "peerDependencies": {},
+  "dependencies": {}
 }

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lerna": "6.6.2"
+    "lerna": "6.6.2",
+    "@zidabah/date-renderer": "0.0.4"
   }
 }

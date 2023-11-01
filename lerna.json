@@ -8,5 +8,11 @@
       "registry": "https://npm.pkg.github.com",
       "bump": "patch"
     }
-  }
+  },
+  "ignoreChanges": [
+    "**/CHANGELOG.md",
+    "**/node_modules/**",
+    "**/package.json",
+    "**/*.md"
+  ]
 }

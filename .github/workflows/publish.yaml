@@ -38,4 +38,4 @@ jobs:
           npx lerna version --no-git-tag-version --conventional-commits --conventional-graduate --yes
           git add .
           git commit -m 'version bump'
-          npx lerna publish from-git --yes
+          npx lerna publish from-git --yes --registry=https://npm.pkg.github.com

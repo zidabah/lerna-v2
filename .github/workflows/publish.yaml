@@ -1,27 +1,25 @@
 name: Publish
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - dev
       - main
 
-permissions: write-all
-
 jobs:
   publish:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          clean: true
           fetch-depth: 0
 
       - name: "Use NodeJS 18"
-        uses: actions/setup-node@v3.8.0
+        uses: actions/setup-node@v3
         with:
           node-version: "18"
 
@@ -29,7 +27,6 @@ jobs:
         run: |
           npm set @zidabah:registry=https://npm.pkg.github.com
           npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
-
       - name: "Version and publish"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,5 +34,13 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
           
-          npx lerna version --conventional-commits --conventional-graduate --yes
-          npx lerna publish from-git --yes --registry=https://npm.pkg.github.com
+          git stash
+          git checkout ${{ github.ref }}
+          
+          if [ ${{ github.base_ref }} = development ]; then
+            npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
+          else
+            npx lerna version --conventional-commits --conventional-graduate --yes
+          fi
+          
+          npx lerna publish from-git --yes

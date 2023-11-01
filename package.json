@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lerna": "^7.4.2"
+    "lerna": "6.6.2"
   }
 }

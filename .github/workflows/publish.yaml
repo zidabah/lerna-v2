@@ -6,6 +6,11 @@ on:
       - dev
       - main
 
+permissions:
+  pull-requests: write
+  issues: write
+  repository-projects: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -36,6 +41,4 @@ jobs:
           git config user.email "${{ github.actor}}@users.noreply.github.com"
           
           npx lerna version --conventional-commits --conventional-graduate --yes
-          git add .
-          git commit -m 'version bump'
           npx lerna publish from-git --yes --registry=https://npm.pkg.github.com

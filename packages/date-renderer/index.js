@@ -1,5 +1,5 @@
 const getDate = require('@zidabah/date-logic');
 
 (() => {
-    console.log(`Date: ${getDate()}`);
+    console.log(`new Date: ${getDate()}`);
 })();

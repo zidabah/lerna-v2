@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4-next.0](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-logic@1.1.3-next.0...@zidabah/date-logic@1.1.4-next.0) (2023-11-01)
+
+
+### Features
+
+* update index js ([98e01e7](https://github.com/zidabah/lerna-v2/commit/98e01e74a87e3caf8c5331b561271bb3951f0faa))
+
+
+
+
+
 ## [1.1.3-next.0](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-logic@1.1.2-next.0...@zidabah/date-logic@1.1.3-next.0) (2023-11-01)
 
 **Note:** Version bump only for package @zidabah/date-logic

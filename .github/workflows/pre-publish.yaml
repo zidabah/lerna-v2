@@ -42,6 +42,5 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
           
-          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
-          
+          npx lerna version prepatch --preid next --conventional-commits --conventional-prerelease --yes
           npx lerna publish from-git --yes

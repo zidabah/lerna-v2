@@ -8,8 +8,7 @@
   },
   "repository": "https://github.com/zidabah/lerna-v2",
   "publishConfig": {
-    "access": "public",
-    "@zidabah:registry": "https://npm.pkg.github.com/zidabah"
+    "registry": "https://npm.pkg.github.com"
   },
   "author": "",
   "license": "ISC",

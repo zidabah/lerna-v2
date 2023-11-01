@@ -9,7 +9,7 @@ on:
 permissions: write-all
 
 jobs:
-  publish:
+  pre-publish:
     runs-on: ubuntu-latest
 
     steps:

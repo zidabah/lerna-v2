@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-beta.4](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-renderer@0.1.0-beta.3...@zidabah/date-renderer@0.1.0-beta.4) (2023-11-02)
+
+
+### Features
+
+* **date-renderer:** update file ([573af61](https://github.com/zidabah/lerna-v2/commit/573af61a78aeb9b95714d887efea32a1544743e8))
+
+
+
+
+
 # [0.1.0-beta.3](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-renderer@0.1.0-beta.2...@zidabah/date-renderer@0.1.0-beta.3) (2023-11-02)
 
 

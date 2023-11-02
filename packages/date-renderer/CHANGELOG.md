@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-beta.0](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-renderer@0.0.6-beta.0...@zidabah/date-renderer@0.1.0-beta.0) (2023-11-02)
+
+
+### Features
+
+* update file ([5b5f386](https://github.com/zidabah/lerna-v2/commit/5b5f386159a1ad628fb4d7217be760d2d8e787b4))
+
+
+
+
+
 ## [0.0.6-beta.0](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-renderer@0.0.5...@zidabah/date-renderer@0.0.6-beta.0) (2023-11-01)
 
 **Note:** Version bump only for package @zidabah/date-renderer

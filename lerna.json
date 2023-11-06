@@ -1,19 +1,21 @@
 {
   "packages": [
-    "packages/*"
+    "packages/*",
+    "./"
   ],
   "version": "independent",
   "command": {
     "publish": {
-      "registry": "https://npm.pkg.github.com",
-      "bump": "patch"
+      "registry": "https://npm.pkg.github.com"
     }
   },
   "ignoreChanges": [
     "**/CHANGELOG.md",
     "**/node_modules/**",
     "**/package.json",
+    "lerna.json",
     "**/package-lock.json",
-    "**/*.md"
+    "**/*.md",
+    "**/*.yaml"
   ]
 }

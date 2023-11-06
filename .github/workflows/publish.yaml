@@ -41,7 +41,8 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
           
-          npx lerna version --conventional-commits --conventional-graduate --yes
+#          npx lerna version --conventional-commits --conventional-graduate --yes
+          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
           npx lerna publish from-git --yes
 
       - name: "Update package.json with latest library version"

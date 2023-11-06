@@ -1,11 +1,11 @@
 name: Publish
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
+      - master
       - dev
-      - main
+      - added_lerna_to_actions
 
 permissions: write-all
 
@@ -18,6 +18,8 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v3
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          clean: true
           fetch-depth: 0
 
       - name: "Use NodeJS 18"
@@ -29,6 +31,11 @@ jobs:
         run: |
           npm set @zidabah:registry=https://npm.pkg.github.com
           npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+
+      - name: "Install dependencies"
+        run: |
+          npm ci
+
       - name: "Version and publish"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,13 +43,17 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
           
-          git stash
-          git checkout ${{ github.ref }}
-          
-          if [ ${{ github.base_ref }} = development ]; then
-            npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
-          else
-            npx lerna version --conventional-commits --conventional-graduate --yes
-          fi
-          
+          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
           npx lerna publish from-git --yes
+
+      - name: "Update package.json with latest library version"
+        run: |
+          latest_version=$(npm view @zidabah/date-renderer version)
+          jq --arg latest_version "$latest_version" '.dependencies["@zidabah/date-renderer"] = $latest_version' package.json > package.json.tmp
+          mv package.json.tmp package.json
+
+      - name: "Commit and push changes"
+        run: |
+          git add package.json
+          git commit -m "Update libraries to the latest version"
+          git push

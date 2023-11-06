@@ -46,12 +46,12 @@ jobs:
 
       - name: "Update package.json with latest library version"
         run: |
-          latest_version=$(npm view @zidabah/date-renderer version)
-          latest_version=$(npm view @zidabah/date-logic version)
-
-          jq --arg latest_version "$latest_version" '.dependencies["@zidabah/date-renderer"] = $latest_version' package.json > package.json.tmp
-          jq --arg latest_version "$latest_version" '.dependencies["@zidabah/date-logic"] = $latest_version' package.json > package.json.tmp
-          mv package.json.tmp package.json
+          package_names=("date-renderer" "date-logic") # List of package names to update
+          for pkg in "${package_names[@]}"; do
+            latest_version=$(npm view "@zidabah/$pkg" version)
+            jq --arg latest_version "$latest_version" ".dependencies[\"@zidabah/$pkg\"] = \$latest_version" package.json > package.json.tmp
+            mv package.json.tmp package.json
+          done
 
       - name: "Commit and push changes"
         run: |

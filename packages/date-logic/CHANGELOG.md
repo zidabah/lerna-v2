@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0-beta.4](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-logic@1.4.0-beta.0...@zidabah/date-logic@1.4.0-beta.4) (2023-12-06)
+
+
+### Features
+
+* **date-logic:** update index.json ([a36d03c](https://github.com/zidabah/lerna-v2/commit/a36d03c1fe02b53c7be1e81b8361f4eb68d098cb))
+* update logic lib ([41671d6](https://github.com/zidabah/lerna-v2/commit/41671d6e4ecdcd725ea5b738f3ec538cbb391dfd))
+* update logic lib ([ff60ee3](https://github.com/zidabah/lerna-v2/commit/ff60ee317387d4827e7c06e5a2056c40a5111ba1))
+* update logic lib ([33828fa](https://github.com/zidabah/lerna-v2/commit/33828fad56763c9d464d224f0123b3e2a8dfe7c6))
+* update logic lib ([919127b](https://github.com/zidabah/lerna-v2/commit/919127b1eb3643f2c0fbd4a7805cd7db7bc81859))
+* update logic lib ([0452919](https://github.com/zidabah/lerna-v2/commit/04529199a75f7e30aa7b8261df9ca0753fb4dd6f))
+* update logic lib ([ec78072](https://github.com/zidabah/lerna-v2/commit/ec78072dcab79c2f94df168b5b528e2288e1b922))
+* update scripts ([a6c2f60](https://github.com/zidabah/lerna-v2/commit/a6c2f60449d936bc97a15420e8fae8e5c04c6196))
+
+
+
+
+
 # [1.4.0-beta.3](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-logic@1.4.0-beta.2...@zidabah/date-logic@1.4.0-beta.3) (2023-12-06)
 
 

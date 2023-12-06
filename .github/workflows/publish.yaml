@@ -19,6 +19,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           clean: true
           fetch-depth: 0
+          token: ${{secrets.ACTIONS}}
 
       - name: "Use NodeJS 18"
         uses: actions/setup-node@v3

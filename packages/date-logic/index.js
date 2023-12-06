@@ -7,5 +7,5 @@ module.exports = function getDate(
         day: 'numeric'
     }
 ) {
-    return new Date().toLocaleDateString(locale, options);
+    return new Date();
 };

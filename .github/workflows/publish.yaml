@@ -6,6 +6,9 @@ on:
       - main
       - dev
 
+env:
+  GIT_SSH_COMMAND: ssh -i deploy_key
+
 permissions: write-all
 
 jobs:

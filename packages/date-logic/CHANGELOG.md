@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0-beta.2](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-logic@1.4.0-beta.0...@zidabah/date-logic@1.4.0-beta.2) (2023-12-06)
+
+
+### Features
+
+* **date-logic:** update index.json ([a36d03c](https://github.com/zidabah/lerna-v2/commit/a36d03c1fe02b53c7be1e81b8361f4eb68d098cb))
+* update scripts ([a6c2f60](https://github.com/zidabah/lerna-v2/commit/a6c2f60449d936bc97a15420e8fae8e5c04c6196))
+
+
+
+
+
 # [1.4.0-beta.1](https://github.com/zidabah/lerna-v2/compare/@zidabah/date-logic@1.4.0-beta.0...@zidabah/date-logic@1.4.0-beta.1) (2023-11-07)
 
 

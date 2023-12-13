@@ -65,4 +65,5 @@ jobs:
           # To deploy the application with the latest changes, packages versions must be up to date.
           git add package.json
           git commit --amend -m "Update libraries to the latest version"
-          git push origin --follow-tags
+          git push
+          git push --tags

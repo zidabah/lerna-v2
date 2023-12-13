@@ -1,5 +1,5 @@
 module.exports = function getDate(
 ) {
-    console.log('v4');
+    console.log('v10');
     return new Date();
 };

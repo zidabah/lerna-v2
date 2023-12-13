@@ -42,7 +42,7 @@ jobs:
           git config user.email "${{ github.actor}}@users.noreply.github.com"
 
           # To deploy the application with the latest changes, packages versions must be up to date.
-          npx lerna version --no-git-tag-version --conventional-commits --conventional-prerelease --preid beta --yes
+          npx lerna version --conventional-commits --no-push --no-changelog --yes
           npx lerna publish from-git --yes
 
       - name: "Update package.json with latest library version"
@@ -62,5 +62,5 @@ jobs:
   
           # To deploy the application with the latest changes, packages versions must be up to date.
           git add package.json
-          git commit -m "Update libraries to the latest version"
+          git commit --amend -m "Update libraries to the latest version"
           git push

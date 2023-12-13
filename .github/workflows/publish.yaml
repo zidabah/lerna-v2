@@ -1,15 +1,17 @@
 name: Publish
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
-      - main
+      # note: only for dev branch since we need to release packages only once
       - dev
 
 permissions: write-all
 
 jobs:
-  publish:
+  release:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:

@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "lerna": "7.4.2",
-    "@zidabah/date-renderer": "0.3.0-beta.0",
-    "@zidabah/date-logic": "1.5.0-beta.0"
+    "@zidabah/date-renderer": "0.3.0-beta.1",
+    "@zidabah/date-logic": "1.5.0-beta.1"
   }
 }

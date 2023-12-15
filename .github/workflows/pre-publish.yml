@@ -28,6 +28,12 @@ jobs:
           registry-url: https://npm.pkg.github.com
           node-version: "18.15.0"
 
+      - name: "Setup npm"
+        run: |
+          # To deploy the application with the latest changes, packages versions must be up to date.
+          npm set @zidabah:registry=https://npm.pkg.github.com
+          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+
       - name: "Install deps"
         run: npm ci
 
@@ -50,7 +56,7 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
           # note: use Lerna to version packages based on conventional commits, build, and publish
-          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
+          npx lerna version --conventional-prerelease --preid alpha --yes
           npx lerna publish from-git --yes
 
       - name: "Update package.json with latest library version"

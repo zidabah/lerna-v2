@@ -6,6 +6,8 @@ on:
     branches:
       - 'dev'
 
+permissions: write-all
+
 jobs:
   prerelease:
     runs-on: ubuntu-latest

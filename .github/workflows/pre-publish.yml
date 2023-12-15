@@ -56,7 +56,7 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
           # note: use Lerna to version packages based on conventional commits, build, and publish
-          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
+          npx lerna version --conventional-commits --conventional-prerelease --no-changelog --preid beta --yes
           npx lerna publish from-git --yes
 
       - name: "Update package.json with latest library version"

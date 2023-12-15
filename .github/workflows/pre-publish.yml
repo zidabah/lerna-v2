@@ -52,13 +52,13 @@ jobs:
       - name: "Update package.json with latest library version"
         if: env.NO_CHANGED_PACKAGES != 'true'
         run: |
-          # note: specify the names of the packages to update
-          package_names=("evclient-assets" "evclient-login" "evclient-report" "evclient-share")
+          # To deploy the application with the latest changes, packages versions must be up to date.
+          package_names=("date-renderer" "date-logic") # List of package names to update
           
-          # note: iterate through each package and update its version in package.json
+          # To deploy the application with the latest changes, packages versions must be up to date.
           for pkg in "${package_names[@]}"; do
-            latest_version=$(npm view "@elucidbioimaging/$pkg" version)
-            jq --arg latest_version "$latest_version" ".dependencies[\"@elucidbioimaging/$pkg\"] = \$latest_version" package.json > package.json.tmp
+            latest_version=$(npm view "@zidabah/$pkg" version)
+            jq --arg latest_version "$latest_version" ".dependencies[\"@zidabah/$pkg\"] = \$latest_version" package.json > package.json.tmp
             mv package.json.tmp package.json
           done
           

@@ -1,23 +1,23 @@
-name: Publish
+name: Pre-release packages
 
 on:
   pull_request:
-    types: [closed]
+    types: [ opened, synchronize, reopened ] #clarify about types
     branches:
-      # note: only for dev branch since we need to release packages only once
-      - dev
+      - 'dev'
 
 permissions: write-all
 
 jobs:
-  release:
-    if: github.event.pull_request.merged == true
+  prerelease:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout"
+      - name: "Checkout source code"
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          clean: true
           fetch-depth: 0
 
       - name: "Setup node"
@@ -34,20 +34,33 @@ jobs:
           npm set @zidabah:registry=https://npm.pkg.github.com
           npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
 
-      - name: "Install dependencies"
+      - name: "Install deps"
+        run: npm ci
+
+      - name: "Check for changed packages"
+        shell: bash --noprofile --norc {0}
         run: |
-          npm ci
+          # note: use Lerna to detect changes in packages
+          npx lerna changed --all --json
+          # note: if no changes, set an environment variable to skip the subsequent steps
+          if [ $? -eq 1 ]
+          then
+            echo "NO_CHANGED_PACKAGES=true" >> $GITHUB_ENV
+            exit 0
+          fi
 
       - name: "Version and publish"
+        if: env.NO_CHANGED_PACKAGES != 'true'
         run: |
           git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor}}@users.noreply.github.com"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          npx lerna version --conventional-commits --conventional-graduate --no-changelog --yes
+          # note: use Lerna to version packages based on conventional commits, build, and publish
+          npx lerna version --conventional-commits --conventional-prerelease --no-changelog --preid beta --yes
           npx lerna publish from-git --yes
 
       - name: "Update package.json with latest library version"
+        if: env.NO_CHANGED_PACKAGES != 'true'
         run: |
           # To deploy the application with the latest changes, packages versions must be up to date.
           package_names=("date-renderer" "date-logic") # List of package names to update
@@ -58,12 +71,17 @@ jobs:
             jq --arg latest_version "$latest_version" ".dependencies[\"@zidabah/$pkg\"] = \$latest_version" package.json > package.json.tmp
             mv package.json.tmp package.json
           done
+          
+          # note: clean up temporary files
+          rm -f package.json.tmp
+          
+          # note: install dependencies with the updated package.json
+          npm install
 
       - name: "Commit and push changes"
+        if: env.NO_CHANGED_PACKAGES != 'true'
         run: |
-  
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          git add package.json
-          git commit --amend -m "Update libraries to the latest version"
+          # note: to deploy the application with the latest changes, packages versions must be up to date.
+          git add package.json package-lock.json
+          git commit -m "Update libraries to the latest version"
           git push
-          git push --tags

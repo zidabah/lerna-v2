@@ -1,12 +1,12 @@
 name: Pre-release packages
 
 on:
-  push:
+  pull_request:
+    types: [ opened, synchronize, reopened ] #clarify about types
     branches:
       - '**'
-    branches-ignore:
-      - dev
-      - master
+      - '!dev'
+      - '!master'
 
 jobs:
   prerelease:

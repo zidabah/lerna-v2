@@ -1,0 +1,80 @@
+name: Pre-release packages
+
+on:
+  push:
+    branches:
+      - '**'
+    branches-ignore:
+      - dev
+      - master
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Setup node"
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          cache-dependency-path: package-lock.json
+          registry-url: https://npm.pkg.github.com
+          node-version: "18.15.0"
+
+      - name: "Install deps"
+        run: npm ci
+
+      - name: "Check for changed packages"
+        shell: bash --noprofile --norc {0}
+        run: |
+          # note: use Lerna to detect changes in packages
+          npx lerna changed --all --json
+          # note: if no changes, set an environment variable to skip the subsequent steps
+          if [ $? -eq 1 ]
+          then
+            echo "NO_CHANGED_PACKAGES=true" >> $GITHUB_ENV
+            exit 0
+          fi
+
+      - name: "Version and publish"
+        if: env.NO_CHANGED_PACKAGES != 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+          # note: use Lerna to version packages based on conventional commits, build, and publish
+          npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
+          npm run build-packages
+          npx lerna publish from-git --yes
+
+      - name: "Update package.json with latest library version"
+        if: env.NO_CHANGED_PACKAGES != 'true'
+        run: |
+          # note: specify the names of the packages to update
+          package_names=("evclient-assets" "evclient-login" "evclient-report" "evclient-share")
+          
+          # note: iterate through each package and update its version in package.json
+          for pkg in "${package_names[@]}"; do
+            latest_version=$(npm view "@elucidbioimaging/$pkg" version)
+            jq --arg latest_version "$latest_version" ".dependencies[\"@elucidbioimaging/$pkg\"] = \$latest_version" package.json > package.json.tmp
+            mv package.json.tmp package.json
+          done
+          
+          # note: clean up temporary files
+          rm -f package.json.tmp
+          
+          # note: install dependencies with the updated package.json
+          npm install
+
+      - name: "Commit and push changes"
+        if: env.NO_CHANGED_PACKAGES != 'true'
+        run: |
+          # note: to deploy the application with the latest changes, packages versions must be up to date.
+          git add package.json package-lock.json
+          git commit -m "Update libraries to the latest version"
+          git push

@@ -61,7 +61,7 @@ jobs:
 
       - name: "Commit and push changes"
         run: |
-  
+          git pull
           # To deploy the application with the latest changes, packages versions must be up to date.
           git add package.json
           git commit --amend -m "Update libraries to the latest version"

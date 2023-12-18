@@ -1,0 +1,52 @@
+name: PR
+
+on:
+  workflow_call:
+    inputs:
+      project:
+        description: The project to run the workflow on
+        required: true
+        type: string
+
+permissions: write-all
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          clean: true
+          fetch-depth: 0
+
+      - name: "Setup node"
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          cache-dependency-path: package-lock.json
+          registry-url: https://npm.pkg.github.com
+          node-version: "18.15.0"
+
+      - name: "Setup npm"
+        run: |
+          # To deploy the application with the latest changes, packages versions must be up to date.
+          npm set @zidabah:registry=https://npm.pkg.github.com
+          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+
+      - name: "Install deps"
+        run: npm ci
+
+      - name: "Check for changed packages"
+        shell: bash --noprofile --norc {0}
+        run: |
+          # note: use Lerna to detect changes in packages
+          npx lerna changed --all --json
+          # note: if no changes, set an environment variable to skip the subsequent steps
+          if [ $? -eq 1 ]
+          then
+            echo "NO_CHANGED_PACKAGES=true" >> $GITHUB_ENV
+            exit 0
+          fi

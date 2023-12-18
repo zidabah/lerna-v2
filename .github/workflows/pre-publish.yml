@@ -13,41 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout source code"
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          clean: true
-          fetch-depth: 0
-
-      - name: "Setup node"
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          cache-dependency-path: package-lock.json
-          registry-url: https://npm.pkg.github.com
-          node-version: "18.15.0"
-
-      - name: "Setup npm"
-        run: |
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          npm set @zidabah:registry=https://npm.pkg.github.com
-          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
-
-      - name: "Install deps"
-        run: npm ci
-
-      - name: "Check for changed packages"
-        shell: bash --noprofile --norc {0}
-        run: |
-          # note: use Lerna to detect changes in packages
-          npx lerna changed --all --json
-          # note: if no changes, set an environment variable to skip the subsequent steps
-          if [ $? -eq 1 ]
-          then
-            echo "NO_CHANGED_PACKAGES=true" >> $GITHUB_ENV
-            exit 0
-          fi
+      - uses: ./.github/workflows/generic.pr.yml
 
       - name: "Version and publish"
         if: env.NO_CHANGED_PACKAGES != 'true'
@@ -64,29 +30,4 @@ jobs:
           npx lerna version --conventional-commits --conventional-prerelease --no-changelog --preid "beta.${ticket_number}" --yes
           npx lerna publish from-git --yes
 
-      - name: "Update package.json with latest library version"
-        if: env.NO_CHANGED_PACKAGES != 'true'
-        run: |
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          package_names=("date-renderer" "date-logic") # List of package names to update
-          
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          for pkg in "${package_names[@]}"; do
-            latest_version=$(npm view "@zidabah/$pkg" version)
-            jq --arg latest_version "$latest_version" ".dependencies[\"@zidabah/$pkg\"] = \$latest_version" package.json > package.json.tmp
-            mv package.json.tmp package.json
-          done
-          
-          # note: clean up temporary files
-          rm -f package.json.tmp
-          
-          # note: install dependencies with the updated package.json
-          npm install
-
-      - name: "Commit and push changes"
-        if: env.NO_CHANGED_PACKAGES != 'true'
-        run: |
-          # note: to deploy the application with the latest changes, packages versions must be up to date.
-          git add package.json package-lock.json
-          git commit -m "Update libraries to the latest version"
-          git push
+      - uses: ./.github/workflows/generic.version-bump.yml

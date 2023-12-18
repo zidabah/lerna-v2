@@ -1,7 +1,8 @@
 name: PR
 
-#on:
-#  workflow_call:
+on:
+  workflow_run:
+    workflows: ["Main Workflow"]
 
 #permissions: write-all
 
@@ -9,12 +10,12 @@ runs:
   using: "composite"
 
     steps:
-#      - name: "Checkout source code"
-#        uses: actions/checkout@v4
-#        with:
-#          ref: ${{ github.event.pull_request.head.ref }}
-#          clean: true
-#          fetch-depth: 0
+      - name: "Checkout source code"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          clean: true
+          fetch-depth: 0
 
       - name: "Setup node"
         uses: actions/setup-node@v4

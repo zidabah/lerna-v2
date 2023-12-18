@@ -1,4 +1,4 @@
-name: Pre-release packages
+name: Main Workflow
 
 on:
   pull_request:
@@ -11,14 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout source code"
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          clean: true
-          fetch-depth: 0
-
-      - uses: ./.github/workflows/generic.pr.yml
+      - name: "Generic Workflow"
+        uses: ./.github/workflows/generic.pr.yml
 
       - name: "Version and publish"
         if: env.NO_CHANGED_PACKAGES != 'true'

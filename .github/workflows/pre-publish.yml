@@ -10,24 +10,22 @@ permissions: write-all
 
 jobs:
   run-generic:
-    - name: "Generic PR"
-      uses: ./.github/workflows/generic.pr.yml
+    steps:
+      - uses: ./.github/workflows/generic.pr.yml
 
-    - name: "Version and publish"
-      if: env.NO_CHANGED_PACKAGES != 'true'
-      run: |
-        git config user.name "${{ github.actor }}"
-        git config user.email "${{ github.actor }}@users.noreply.github.com"
-        
-        branch_name="${{ github.event.pull_request.head.ref }}"
-        echo "Branch name: $branch_name"
-        ticket_number=$(echo "$branch_name" | sed -n 's/[Zz][Ee][Nn]-\([0-9]\+\).*/\1/p')
-        echo "Ticket number: $ticket_number"
+      - name: "Version and publish"
+        if: env.NO_CHANGED_PACKAGES != 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          
+          branch_name="${{ github.event.pull_request.head.ref }}"
+          echo "Branch name: $branch_name"
+          ticket_number=$(echo "$branch_name" | sed -n 's/[Zz][Ee][Nn]-\([0-9]\+\).*/\1/p')
+          echo "Ticket number: $ticket_number"
+  
+          # note: use Lerna to version packages based on conventional commits, build, and publish
+          npx lerna version --conventional-commits --conventional-prerelease --no-changelog --preid "beta.${ticket_number}" --yes
+          npx lerna publish from-git --yes
 
-        # note: use Lerna to version packages based on conventional commits, build, and publish
-        npx lerna version --conventional-commits --conventional-prerelease --no-changelog --preid "beta.${ticket_number}" --yes
-        npx lerna publish from-git --yes
-
-
-    - name: "Version bump"
-      uses: ./.github/workflows/generic.version-bump.yml
+      - uses: ./.github/workflows/generic.version-bump.yml

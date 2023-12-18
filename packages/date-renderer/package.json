@@ -1,6 +1,6 @@
 {
   "name": "@zidabah/date-renderer",
-  "version": "0.6.0",
+  "version": "0.7.0-beta.feature-3222.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zidabah/date-logic": "^1.8.0"
+    "@zidabah/date-logic": "^1.9.0-beta.feature-3222.0"
   }
 }

@@ -6,12 +6,10 @@ on:
     branches:
       - 'dev'
 
-permissions: write-all
-
 jobs:
   run-generic:
-    runs-on: ubuntu-latest
     name: assets
+    permissions: write-all
     uses: ./.github/workflows/generic.pr.yml
 
 #    - name: "Version and publish"

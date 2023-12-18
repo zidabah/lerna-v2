@@ -1,13 +1,12 @@
 name: PR
 
-on:
-  workflow_call:
+#on:
+#  workflow_call:
 
-permissions: write-all
+#permissions: write-all
 
-jobs:
-  run-generic:
-    runs-on: ubuntu-latest
+runs:
+  using: "composite"
 
     steps:
       - name: "Checkout source code"

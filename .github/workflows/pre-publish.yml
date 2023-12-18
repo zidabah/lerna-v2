@@ -8,11 +8,11 @@ on:
 
 jobs:
   run-generic:
-    name: Preparation
-    permissions: write-all
-    uses: ./.github/workflows/generic.pr.yml
+    runs-on: ubuntu-latest
 
     steps:
+      - uses: ./.github/workflows/generic.pr.yml
+
       - name: "Version and publish"
         if: env.NO_CHANGED_PACKAGES != 'true'
         run: |

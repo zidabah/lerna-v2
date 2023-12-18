@@ -1,5 +1,5 @@
 module.exports = function getDate(
 ) {
-    console.log('v1.8 beta 2 unstable');
+    console.log('v1.9 beta 0 unstable');
     return new Date();
 };

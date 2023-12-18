@@ -54,9 +54,11 @@ jobs:
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
+          
+          ticket_number=$(echo "${{ github.event.pull_request.head.ref }}" | grep -oP 'feature-(\d+)')
 
           # note: use Lerna to version packages based on conventional commits, build, and publish
-          npx lerna version --conventional-commits --conventional-prerelease --no-changelog --preid beta --yes
+          npx lerna version --conventional-commits --conventional-prerelease --no-changelog --preid "beta.${ticket_number}" --yes
           npx lerna publish from-git --yes
 
       - name: "Update package.json with latest library version"

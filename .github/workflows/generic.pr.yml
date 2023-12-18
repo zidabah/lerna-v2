@@ -11,7 +11,7 @@ on:
 permissions: write-all
 
 jobs:
-  pr:
+  run-generic:
     runs-on: ubuntu-latest
 
     steps:

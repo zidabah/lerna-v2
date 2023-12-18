@@ -13,6 +13,7 @@ jobs:
     uses: ./.github/workflows/generic.pr.yml
 
   run-publish:
+    runs-on: ubuntu-latest
     steps:
       - name: "Version and publish"
         if: env.NO_CHANGED_PACKAGES != 'true'

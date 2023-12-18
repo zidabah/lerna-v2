@@ -4,7 +4,8 @@ on:
   pull_request:
     types: [ opened, synchronize, reopened ] #clarify about types
     branches:
-      - 'dev'
+      - '**'
+      - '!dev'
 
 jobs:
   main-job:

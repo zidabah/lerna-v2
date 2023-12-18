@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: "Generic Workflow"
-        uses: ./.github/workflows/generic.pr.yml
+        uses: .github/workflows/generic.pr.yml
 
       - name: "Version and publish"
         if: env.NO_CHANGED_PACKAGES != 'true'

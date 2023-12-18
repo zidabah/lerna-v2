@@ -8,8 +8,9 @@ on:
 
 #permissions: write-all
 
-runs:
-  using: "composite"
+jobs:
+  generic-job:
+    runs-on: ubuntu-latest
 
     steps:
       - name: "Checkout source code"

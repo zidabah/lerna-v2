@@ -7,7 +7,7 @@ on:
       - 'dev'
 
 jobs:
-  run-generic:
+  main-job:
     runs-on: ubuntu-latest
 
     steps:

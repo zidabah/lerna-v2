@@ -3,19 +3,6 @@ description: 'basic PR steps'
 runs:
   using: "composite"
   steps:
-    - name: "Checkout"
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: "Setup node"
-      uses: actions/setup-node@v4
-      with:
-        cache: npm
-        cache-dependency-path: package-lock.json
-        registry-url: https://npm.pkg.github.com
-        node-version: "18.15.0"
-
     - name: "Setup npm"
       shell: bash
       run: |

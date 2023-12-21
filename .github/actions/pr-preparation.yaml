@@ -1,0 +1,30 @@
+name: 'PR'
+description: 'basic PR steps'
+runs:
+  using: "composite"
+  steps:
+    - name: "Checkout"
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: "Setup node"
+      uses: actions/setup-node@v4
+      with:
+        cache: npm
+        cache-dependency-path: package-lock.json
+        registry-url: https://npm.pkg.github.com
+        node-version: "18.15.0"
+
+    - name: "Setup npm"
+      shell: bash
+      run: |
+        # To deploy the application with the latest changes, packages versions must be up to date.
+        npm set @zidabah:registry=https://npm.pkg.github.com
+        npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+
+
+    - name: "Install dependencies"
+      shell: bash
+      run: |
+        npm ci

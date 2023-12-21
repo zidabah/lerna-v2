@@ -1,5 +1,9 @@
 name: 'PR'
 description: 'basic PR steps'
+inputs:
+  gh_token:
+    description: "GH TOKEN to install private packages"
+    required: true
 runs:
   using: "composite"
   steps:
@@ -8,7 +12,7 @@ runs:
       run: |
         # To deploy the application with the latest changes, packages versions must be up to date.
         npm set @zidabah:registry=https://npm.pkg.github.com
-        npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+        npm set "//npm.pkg.github.com/:_authToken=${{ inputs.gh_token }}"
 
 
     - name: "Install dependencies"

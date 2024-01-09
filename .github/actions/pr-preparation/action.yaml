@@ -1,12 +1,20 @@
-name: 'PR'
-description: 'basic PR steps'
+name: 'Setup Node and NPM'
+description: 'Facilitate the setup of Node, NPM and dependency installation process for'
 inputs:
   gh_token:
-    description: "GH TOKEN to install private packages"
+    description: "GitHub Token for authentication to install private packages from GitHub Packages."
     required: true
 runs:
   using: "composite"
   steps:
+    - name: "Setup node"
+      uses: actions/setup-node@v4
+      with:
+        cache: npm
+        cache-dependency-path: package-lock.json
+        registry-url: https://npm.pkg.github.com
+        node-version: 18.15.0
+
     - name: "Setup npm"
       shell: bash
       run: |
@@ -14,8 +22,6 @@ runs:
         npm set @zidabah:registry=https://npm.pkg.github.com
         npm set "//npm.pkg.github.com/:_authToken=${{ inputs.gh_token }}"
 
-
-    - name: "Install dependencies"
+    - name: "Install Dependencies"
       shell: bash
-      run: |
-        npm ci
+      run: npm ci

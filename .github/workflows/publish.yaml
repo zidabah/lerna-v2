@@ -23,7 +23,20 @@ jobs:
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Check for changed packages"
+        shell: bash --noprofile --norc {0}
+        run: |
+          # note: use Lerna to detect changes in packages
+          npx lerna changed --all --json
+          # note: if no changes, set an environment variable to skip the subsequent steps
+          if [ $? -eq 1 ]
+          then
+            echo "NO_CHANGED_PACKAGES=true" >> $GITHUB_ENV
+            exit 0
+          fi
+
       - name: "Version and publish"
+        if: env.NO_CHANGED_PACKAGES != 'true'
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
@@ -33,6 +46,7 @@ jobs:
           npx lerna publish from-git --yes
 
       - name: "Update package.json with latest library version"
+        if: env.NO_CHANGED_PACKAGES != 'true'
         run: |
           # To deploy the application with the latest changes, packages versions must be up to date.
           package_names=("date-renderer" "date-logic") # List of package names to update
@@ -45,6 +59,8 @@ jobs:
           done
 
       - name: "Commit and push changes"
+
+        if: env.NO_CHANGED_PACKAGES != 'true'
         run: |
           # To deploy the application with the latest changes, packages versions must be up to date.
           git add package.json

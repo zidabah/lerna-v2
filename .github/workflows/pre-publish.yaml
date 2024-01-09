@@ -1,9 +1,9 @@
-name: Publish
+name: Pre-publish
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
     branches:
-      # note: only for dev branch since we need to release packages only once
       - dev
 
 permissions: write-all
@@ -13,9 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout"
+      - name: "Checkout source code"
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - name: "Run PR preparation steps"

@@ -27,7 +27,7 @@ jobs:
       - name: "Check for changed packages"
         shell: bash --noprofile --norc {0}
         run: |
-          git tag --all
+          git tag
           
           # note: use Lerna to detect changes in packages
           npx lerna changed --all --json

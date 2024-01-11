@@ -19,6 +19,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
+      - name: automatic rebase
+        uses: cirrus-actions/rebase@1.5
+
       - name: "Run PR preparation steps"
         uses: ./.github/actions/pr-preparation
         with:

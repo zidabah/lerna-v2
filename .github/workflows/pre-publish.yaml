@@ -78,3 +78,5 @@ jobs:
           git add package.json
           git commit -m "chore: update libraries to the latest version"
           git push
+          
+          git log --oneline -20

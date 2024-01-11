@@ -24,6 +24,9 @@ jobs:
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "List tags"
+        run: git tag
+
       - name: "Check for changed packages"
         shell: bash --noprofile --norc {0}
         run: |

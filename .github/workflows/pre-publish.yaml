@@ -35,6 +35,8 @@ jobs:
             echo "NO_CHANGED_PACKAGES=true" >> $GITHUB_ENV
             exit 0
           fi
+          
+          git tag --all
 
       - name: "Version and publish"
         if: env.NO_CHANGED_PACKAGES != 'true'

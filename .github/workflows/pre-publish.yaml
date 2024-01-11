@@ -27,6 +27,8 @@ jobs:
       - name: "Check for changed packages"
         shell: bash --noprofile --norc {0}
         run: |
+          git tag --all
+          
           # note: use Lerna to detect changes in packages
           npx lerna changed --all --json
           # note: if no changes, set an environment variable to skip the subsequent steps
@@ -35,8 +37,6 @@ jobs:
             echo "NO_CHANGED_PACKAGES=true" >> $GITHUB_ENV
             exit 0
           fi
-          
-          git tag --all
 
       - name: "Version and publish"
         if: env.NO_CHANGED_PACKAGES != 'true'

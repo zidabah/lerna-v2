@@ -45,4 +45,5 @@ jobs:
           npx lerna version --conventional-commits --conventional-graduate --no-changelog --exact --amend --yes
           npx lerna publish from-git --yes
           
+          git pull
           git push

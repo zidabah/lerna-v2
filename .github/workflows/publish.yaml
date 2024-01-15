@@ -44,25 +44,3 @@ jobs:
           # To deploy the application with the latest changes, packages versions must be up to date.
           npx lerna version --conventional-commits --conventional-graduate --no-changelog --yes
           npx lerna publish from-git --yes
-
-      - name: "Update package.json with latest library version"
-        if: env.NO_CHANGED_PACKAGES != 'true'
-        run: |
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          package_names=("date-renderer" "date-logic") # List of package names to update
-          
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          for pkg in "${package_names[@]}"; do
-            latest_version=$(npm view "@zidabah/$pkg" version)
-            jq --arg latest_version "$latest_version" ".dependencies[\"@zidabah/$pkg\"] = \$latest_version" package.json > package.json.tmp
-            mv package.json.tmp package.json
-          done
-
-      - name: "Commit and push changes"
-
-        if: env.NO_CHANGED_PACKAGES != 'true'
-        run: |
-          # To deploy the application with the latest changes, packages versions must be up to date.
-          git add package.json
-          git commit -m "chore: update libraries to the latest version"
-          git push

@@ -1,19 +1,19 @@
 {
   "name": "lerna-v2",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "private": "true",
   "workspaces": [
     "packages/*"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zidabah/date-logic": "^1.11.9",
-    "@zidabah/date-renderer": "^0.9.9",
-    "lerna": "7.4.2"
+    "@zidabah/date-renderer": "0.9.8",
+    "@zidabah/date-logic": "1.11.8"
   }
 }

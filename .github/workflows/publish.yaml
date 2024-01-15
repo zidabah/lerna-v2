@@ -42,5 +42,5 @@ jobs:
           git config user.email "${{ github.actor}}@users.noreply.github.com"
 
           # To deploy the application with the latest changes, packages versions must be up to date.
-          npx lerna version --conventional-commits --conventional-graduate --no-changelog --yes
+          npx lerna version --conventional-commits --conventional-graduate --no-changelog --exact --yes
           npx lerna publish from-git --yes

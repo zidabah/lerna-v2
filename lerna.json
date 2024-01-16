@@ -6,7 +6,7 @@
   "version": "independent",
   "command": {
     "version": {
-      "message": "chore: release packages [skip ci]"
+      "message": "chore: release packages"
     },
     "publish": {
       "registry": "https://npm.pkg.github.com"

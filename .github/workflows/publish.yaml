@@ -44,6 +44,3 @@ jobs:
           # To deploy the application with the latest changes, packages versions must be up to date.
           npx lerna version --conventional-commits --no-changelog --exact --yes
           npx lerna publish from-git --yes
-          
-          git pull
-          git push

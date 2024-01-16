@@ -1,6 +1,6 @@
 {
   "name": "lerna-v2",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zidabah/date-logic": "1.11.11",
-    "@zidabah/date-renderer": "0.9.11"
+    "@zidabah/date-logic": "1.11.12",
+    "@zidabah/date-renderer": "0.9.12"
   }
 }

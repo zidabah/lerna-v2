@@ -3,6 +3,7 @@
     ".",
     "packages/*"
   ],
+  "useWorkspaces": true,
   "version": "independent",
   "command": {
     "version": {

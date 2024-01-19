@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zidabah/date-logic": "1.11.18",
-    "@zidabah/date-renderer": "0.9.18",
+    "@zidabah/date-logic": "1.11.7",
+    "@zidabah/date-renderer": "0.9.17",
     "lerna": "7.4.2"
   }
 }

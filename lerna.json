@@ -13,7 +13,12 @@
     }
   },
   "ignoreChanges": [
-    "**/*",
-    "!packages/**"
+    "src/**",
+    "**/CHANGELOG.md",
+    "**/node_modules/**",
+    "**/package.json",
+    "lerna.json",
+    "**/package-lock.json",
+    "**/*.yaml"
   ]
 }

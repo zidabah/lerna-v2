@@ -1,11 +1,11 @@
 {
   "packages": [
-    ".",
     "packages/*"
   ],
   "version": "independent",
   "command": {
     "version": {
+      "version": "npm install",
       "message": "chore: release packages"
     },
     "publish": {

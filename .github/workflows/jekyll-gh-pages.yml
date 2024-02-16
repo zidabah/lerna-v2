@@ -77,16 +77,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-jekyll, build-compodoc]
     steps:
-      - name: Download Jekyll site artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: jekyll-site
-          path: _site
       - name: Download Compodoc documentation artifact
         uses: actions/download-artifact@v2
         with:
           name: compodoc-documentation
           path: documentation
+      - name: Download Jekyll site artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: jekyll-site
+          path: _site
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:

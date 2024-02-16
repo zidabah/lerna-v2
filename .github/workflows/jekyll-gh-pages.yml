@@ -43,12 +43,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+
+      - name: "Setup node"
+        uses: actions/setup-node@v4
         with:
-          node-version: "14"
-      - name: Install dependencies
+          registry-url: https://npm.pkg.github.com
+          node-version: 18.15.0
+
+      - name: "Setup npm"
+        shell: bash
+        run: |
+          # To deploy the application with the latest changes, packages versions must be up to date.
+          npm set @zidabah:registry=https://npm.pkg.github.com
+          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+      - name: "Install Dependencies"
         run: npm install
+
       - name: Generate Compodoc documentation
         run: npm run compodoc
       - name: Upload artifact

@@ -35,7 +35,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          artifact-name: jekyll-site
+          name: jekyll-site
           path: _site
 
   # Build job for Compodoc documentation

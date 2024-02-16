@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "compodoc": "npx compodoc -p tsconfig.doc.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": "true",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zidabah/date-logic": "^1.11.7",
-    "@zidabah/date-renderer": "^0.9.17",
-    "lerna": "7.4.2"
+    "lerna": "7.4.2",
+    "@zidabah/date-renderer": "0.9.9-alpha.0",
+    "@zidabah/date-logic": "1.11.9-alpha.0",
+    "@compodoc/compodoc": "1.1.23"
   }
 }

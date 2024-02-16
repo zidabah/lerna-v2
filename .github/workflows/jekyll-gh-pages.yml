@@ -59,7 +59,7 @@ jobs:
 
       - name: "Install Dependencies"
         shell: bash
-        run: npm ci
+        run: npm install
 
       - name: Generate Compodoc documentation
         run: npm run compodoc

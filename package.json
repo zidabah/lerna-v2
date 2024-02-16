@@ -12,8 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "lerna": "7.4.2",
-    "@zidabah/date-renderer": "0.9.9-alpha.0",
-    "@zidabah/date-logic": "1.11.9-alpha.0",
+    "@zidabah/date-renderer": "0.9.17",
+    "@zidabah/date-logic": "1.11.17",
     "@compodoc/compodoc": "1.1.23"
   }
 }

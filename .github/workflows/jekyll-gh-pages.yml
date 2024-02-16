@@ -89,6 +89,3 @@ jobs:
           path: documentation
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        with:
-          branch: gh-pages
-          folder: _site

@@ -12,11 +12,7 @@ on:
 env:
   NODE_AUTH_TOKEN: ${{ github.token }}
 
-permissions:
-  contents: read
-  pages: write
-  packages: read
-  id-token: write
+permissions: write-all
 
 concurrency:
   group: "pages"
@@ -65,16 +61,6 @@ jobs:
 
       - name: Download documentation artifact
         uses: actions/download-artifact@v2
-#        with:
-#          name: 'github-pages-1'
-#          path: ./documentation
-
-#      - name: Download unit test reports artifact
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: 'github-pages-2'
-#          path: docs
-
 
       - name: Deploy documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

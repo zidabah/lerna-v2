@@ -37,6 +37,9 @@ jobs:
       - name: Generate Compodoc documentation
         run: npm run compodoc
 
+      - name: Generate Compodoc documentation 2
+        run: npx compodoc -p tsconfig.doc.json -d docs
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
@@ -44,6 +47,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./documentation
+          name: 'github-pages-1'
+
+      - name: Upload artifact 2
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs
+          name: 'github-pages-2'
 
   deploy:
     environment:
@@ -53,4 +63,13 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: 'github-pages-1'
+
+      - name: Deploy to GitHub Pages 2
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: 'github-pages-2'

@@ -1,4 +1,4 @@
-name: Deploy with GitHub Pages
+name: Deploy Jekyll with GitHub Pages
 
 on:
   push:
@@ -36,9 +36,9 @@ jobs:
       - name: Generate Compodoc documentation 2
         run: npx compodoc -p tsconfig.doc.json -d docs
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
+#      - name: Setup Pages
+#        uses: actions/configure-pages@v4
+#
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -52,50 +52,6 @@ jobs:
           name: 'github-pages-2'
 
 
-      - name: Deploy documentation to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./documentation
-          user_name: GitHub Actions
-          user_email: actions@github.com
-          #          cname: example.com # if you have a custom domain, add it here
-          publish_branch: gh-pages # New branch for documentation
-          keep_files: true
-          destination_dir: document
-
-      - name: Deploy unit test reports to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          user_name: GitHub Actions
-          user_email: actions@github.com
-          #          cname: example.com # if you have a custom domain, add it here
-          publish_branch: gh-pages # New branch for unit test reports
-          keep_files: true
-          destination_dir: docs
-
-#  deploy:
-#    name: Deploy to GitHub Pages
-#    runs-on: ubuntu-latest
-#    needs: build
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Download documentation artifact
-#        uses: actions/download-artifact@v4
-#        with:
-#          path: ./documentation
-#          name: 'github-pages-1'
-#
-#      - name: Download doc artifact
-#        uses: actions/download-artifact@v4
-#        with:
-#          path: ./docs
-#          name: 'github-pages-2'
-#
 #      - name: Deploy documentation to GitHub Pages
 #        uses: peaceiris/actions-gh-pages@v3
 #        with:
@@ -103,8 +59,10 @@ jobs:
 #          publish_dir: ./documentation
 #          user_name: GitHub Actions
 #          user_email: actions@github.com
-##          cname: example.com # if you have a custom domain, add it here
-#          publish_branch: gh-pages-documentation # New branch for documentation
+#          #          cname: example.com # if you have a custom domain, add it here
+#          publish_branch: gh-pages # New branch for documentation
+#          keep_files: true
+#          destination_dir: document
 #
 #      - name: Deploy unit test reports to GitHub Pages
 #        uses: peaceiris/actions-gh-pages@v3
@@ -113,5 +71,47 @@ jobs:
 #          publish_dir: ./docs
 #          user_name: GitHub Actions
 #          user_email: actions@github.com
-##          cname: example.com # if you have a custom domain, add it here
-#          publish_branch: gh-pages-reports # New branch for unit test reports
+#          #          cname: example.com # if you have a custom domain, add it here
+#          publish_branch: gh-pages # New branch for unit test reports
+#          keep_files: true
+#          destination_dir: docs
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download documentation artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: ./documentation
+          name: 'github-pages-1'
+
+      - name: Download doc artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: ./docs
+          name: 'github-pages-2'
+
+      - name: Deploy documentation to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./documentation
+          user_name: GitHub Actions
+          user_email: actions@github.com
+          keep_files: true
+          publish_branch: gh-pages # New branch for documentation
+
+      - name: Deploy unit test reports to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./document
+          user_name: GitHub Actions
+          user_email: actions@github.com
+          keep_files: true
+          publish_branch: gh-pages # New branch for unit test reports

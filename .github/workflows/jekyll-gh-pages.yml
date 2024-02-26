@@ -91,7 +91,7 @@ jobs:
           name: 'github-pages-1'
 
       - name: Extract documentation artifact
-        run: tar -xf ./artifact.tar -C ./documentation
+        run: tar -xf ./documentation/artifact.tar -C ./documentation
 
       - name: Download doc artifact
         uses: actions/download-artifact@v4
@@ -100,7 +100,7 @@ jobs:
           name: 'github-pages-2'
 
       - name: Extract documentation artifact
-        run: tar -xf ./artifact.tar -C ./documentation
+        run: tar -xf ./docs/artifact.tar -C ./documentation
 
       - name: Deploy documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

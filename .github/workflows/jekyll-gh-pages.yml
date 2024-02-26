@@ -61,6 +61,15 @@ jobs:
 
       - name: Download documentation artifact
         uses: actions/download-artifact@v4
+        with:
+          path: ./documentation
+          name: 'github-pages-1'
+
+      - name: Download doc artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: ./docs
+          name: 'github-pages-2'
 
       - name: Deploy documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

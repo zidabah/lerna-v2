@@ -100,7 +100,7 @@ jobs:
           name: 'github-pages-2'
 
       - name: Extract documentation artifact
-        run: tar -xf ./docs/artifact.tar -C ./documentation
+        run: tar -xf ./docs/artifact.tar -C ./docs
 
       - name: Deploy documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -109,6 +109,7 @@ jobs:
           publish_dir: ./documentation
           user_name: GitHub Actions
           user_email: actions@github.com
+          destination_dir: documentation
           keep_files: true
           publish_branch: gh-pages-1 # New branch for documentation
 
@@ -119,5 +120,6 @@ jobs:
           publish_dir: ./document
           user_name: GitHub Actions
           user_email: actions@github.com
+          destination_dir: document
           keep_files: true
           publish_branch: gh-pages-1 # New branch for unit test reports

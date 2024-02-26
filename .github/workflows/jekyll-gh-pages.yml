@@ -34,7 +34,7 @@ jobs:
         run: npm run compodoc
 
       - name: Generate Compodoc documentation 2
-        run: npx compodoc -p tsconfig.doc.json -d docs
+        run: npx compodoc -p tsconfig.doc.json -d document
 
 #      - name: Setup Pages
 #        uses: actions/configure-pages@v4
@@ -96,7 +96,7 @@ jobs:
       - name: Download doc artifact
         uses: actions/download-artifact@v4
         with:
-          path: ./docs
+          path: ./document
           name: 'github-pages-2'
 
       - name: Extract documentation artifact

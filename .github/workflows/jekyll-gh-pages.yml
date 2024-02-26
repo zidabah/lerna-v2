@@ -60,7 +60,9 @@ jobs:
           user_name: GitHub Actions
           user_email: actions@github.com
           #          cname: example.com # if you have a custom domain, add it here
-          publish_branch: gh-pages-documentation # New branch for documentation
+          publish_branch: gh-pages # New branch for documentation
+          keep_files: true
+          destination_dir: document
 
       - name: Deploy unit test reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -70,7 +72,9 @@ jobs:
           user_name: GitHub Actions
           user_email: actions@github.com
           #          cname: example.com # if you have a custom domain, add it here
-          publish_branch: gh-pages-reports # New branch for unit test reports
+          publish_branch: gh-pages # New branch for unit test reports
+          keep_files: true
+          destination_dir: docs
 
 #  deploy:
 #    name: Deploy to GitHub Pages

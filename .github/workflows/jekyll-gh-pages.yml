@@ -36,7 +36,7 @@ jobs:
 #        uses: actions/configure-pages@v4
 #
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./documentation
           name: 'github-pages-1'
@@ -46,7 +46,7 @@ jobs:
         id: documentation-artifact
 
       - name: Upload artifact 2
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./document
           name: 'github-pages-2'

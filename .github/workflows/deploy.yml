@@ -31,6 +31,7 @@ jobs:
         with:
           path: ./documentation
           name: 'github-pages-1'
+          artifact_id: ${{ needs.jekyll-gh-pages.outputs.documentation-artifact }}
 
       - name: Extract documentation artifact
         run: tar -xf ./documentation/artifact.tar -C ./documentation
@@ -40,6 +41,7 @@ jobs:
         with:
           path: ./document
           name: 'github-pages-2'
+          artifact_id: ${{ needs.jekyll-gh-pages.outputs.document-artifact }}
 
       - name: Extract documentation artifact
         run: tar -xf ./document/artifact.tar -C ./document

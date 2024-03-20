@@ -32,7 +32,12 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Extract documentation artifact
-        run: tar -xf ./documentation/artifact.tar -C ./documentation
+        shell: bash
+        run: |
+          ls -l
+          echo "Test test test"
+          ls -l ./documentation
+          tar -xf ./documentation/artifact.tar -C ./documentation
 
       - name: Download doc artifact
         uses: actions/download-artifact@v4

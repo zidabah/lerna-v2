@@ -31,14 +31,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
 
-      - name: Extract documentation artifact
-        shell: bash
-        run: |
-          ls -l
-          echo "Test test test"
-          ls -l ./documentation
-          tar -xf ./documentation/artifact.tar -C ./documentation
-
       - name: Download doc artifact
         uses: actions/download-artifact@v4
         with:
@@ -46,9 +38,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           name: 'github-pages-2'
           run-id: ${{ github.event.workflow_run.id }}
-
-      - name: Extract documentation artifact
-        run: tar -xf ./document/artifact.tar -C ./document
 
       - name: Deploy documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

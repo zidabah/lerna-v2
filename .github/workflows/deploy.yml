@@ -28,7 +28,7 @@ jobs:
         with:
           path: ./documentation
           name: 'github-pages-1'
-          run_id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Extract documentation artifact
         run: tar -xf ./documentation/artifact.tar -C ./documentation
@@ -38,7 +38,7 @@ jobs:
         with:
           path: ./document
           name: 'github-pages-2'
-          run_id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Extract documentation artifact
         run: tar -xf ./document/artifact.tar -C ./document

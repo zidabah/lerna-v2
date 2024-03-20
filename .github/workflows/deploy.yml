@@ -26,7 +26,6 @@ jobs:
       - name: Download documentation artifact
         uses: actions/download-artifact@v4
         with:
-          path: ./documentation
           name: 'github-pages-1'
           run-id: ${{ github.event.workflow_run.id }}
 
@@ -36,7 +35,6 @@ jobs:
       - name: Download doc artifact
         uses: actions/download-artifact@v4
         with:
-          path: ./document
           name: 'github-pages-2'
           run-id: ${{ github.event.workflow_run.id }}
 

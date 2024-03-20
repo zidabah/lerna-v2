@@ -41,9 +41,9 @@ jobs:
           path: ./documentation
           name: 'github-pages-1'
 
-      - name: Set artifact ID output
-        run: echo "::set-output name=artifact_id::${{ steps.upload-coverage-artifact.outputs.artifact_id }}"
-        id: documentation-artifact
+#      - name: Set artifact ID output
+#        run: echo "::set-output name=artifact_id::${{ steps.upload-coverage-artifact.outputs.artifact_id }}"
+#        id: documentation-artifact
 
       - name: Upload artifact 2
         uses: actions/upload-pages-artifact@v3
@@ -51,6 +51,6 @@ jobs:
           path: ./document
           name: 'github-pages-2'
 
-      - name: Set artifact ID output 2
-        run: echo "::set-output name=artifact_id::${{ steps.upload-coverage-artifact.outputs.artifact_id }}"
-        id: document-artifact
+#      - name: Set artifact ID output 2
+#        run: echo "::set-output name=artifact_id::${{ steps.upload-coverage-artifact.outputs.artifact_id }}"
+#        id: document-artifact
